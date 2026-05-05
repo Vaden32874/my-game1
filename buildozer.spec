@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
 # Ensure there are NO SPACES after the comma here
-requirements = python3,pygame
+requirements = python3,pygame==2.1.0
 
 orientation = portrait
 fullscreen = 1

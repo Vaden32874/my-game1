@@ -7,22 +7,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install System Dependencies
+      - name: Install Build Tools
         run: |
           sudo apt update
           sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
           pip install --user buildozer cython virtualenv
 
-      - name: Fix Permissions
-        run: |
-          # This prevents the 'exit code 100' permission error
-          sudo chown -R runner:docker /home/runner/work/ui-jumper-mobile/ui-jumper-mobile
-
       - name: Build with Buildozer
         run: |
           export PATH=$PATH:$HOME/.local/bin
-          # The '--verbose' flag lets us see exactly where it stops if it fails
-          buildozer --verbose android debug
+          # This command tells Buildozer to ignore the owner check and just build
+          buildozer android debug
         env:
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
 
